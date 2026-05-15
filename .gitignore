@@ -1,0 +1,29 @@
+# Binaries
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Go
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage.out
+coverage.html

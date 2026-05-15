@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: taskforge
+          POSTGRES_PASSWORD: taskforge
+          POSTGRES_DB: taskforge
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U taskforge -d taskforge"
+          --health-interval 3s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 3s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      APP_ENV: test
+      APP_PORT: "8080"
+      DATABASE_URL: postgres://taskforge:taskforge@localhost:5432/taskforge?sslmode=disable
+      REDIS_ADDR: localhost:6379
+      JWT_SECRET: test-secret-ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: gofmt check
+        run: test -z "$(gofmt -l .)"
+
+      - name: vet & test
+        run: |
+          go vet ./...
+          go test ./...
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t taskforge-api-go:ci .
