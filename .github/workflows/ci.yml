@@ -46,6 +46,12 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Install golang-migrate
+        run: go install -tags postgres github.com/golang-migrate/migrate/v4/cmd/migrate@v4.17.1
+
+      - name: Apply database migrations
+        run: migrate -path migrations -database "$DATABASE_URL" up
+
       - name: gofmt check
         run: test -z "$(gofmt -l .)"
 

@@ -45,8 +45,12 @@ Graceful shutdown: `Ctrl+C`.
 | `make down`   | Stop containers        |
 | `make run`    | Run API locally        |
 | `make test`   | Tests                  |
+| `make migrate-install` | Install [`migrate`](https://github.com/golang-migrate/migrate) CLI into `GOBIN` |
+| `make migrate-up` | Apply SQL in **`migrations/`** (needs `DATABASE_URL`, e.g. from `.env`) |
+| `make migrate-down` | Roll back **one** migration (`down 1`) |
+| `make migrate-force` | Repair version table (`VERSION=N make migrate-force`) |
 
-Migrations (`migrate-up` / `migrate-down`) require the [`golang-migrate/migrate`](https://github.com/golang-migrate/migrate) CLI installed; SQL migrations will land in **`migrations/`** in Milestone 2.
+After `make up`, run **`make migrate-install`** once, then **`make migrate-up`** (needs `DATABASE_URL`, e.g. from `.env`). The Makefile invokes **`migrate` from `$(go env GOPATH)/bin`** when it is not on your shell `PATH`.
 
 ## Module path
 
