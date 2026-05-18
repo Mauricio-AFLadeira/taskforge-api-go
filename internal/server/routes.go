@@ -1,3 +1,19 @@
 package server
 
-// Route registration helpers will live here as the API grows (auth, orgs, projects, …).
+// API route wiring lives here so `server.go` stays the single mux owner.
+
+import (
+	"net/http"
+
+	"github.com/mauricio-reportei/taskforge-api-go/internal/auth"
+	"github.com/mauricio-reportei/taskforge-api-go/internal/organizations"
+	"github.com/mauricio-reportei/taskforge-api-go/internal/middleware"
+)
+
+func (s *Server) mountAPIRoutes(mux *http.ServeMux) {
+	h := auth.NewHandler(s.pool, s.cfg)
+	h.RegisterAuth(mux)
+	mux.Handle("/me", middleware.RequireAuth(s.cfg.JWTSecret, http.HandlerFunc(h.Me)))
+	orgs := organizations.NewHandler(s.pool, s.cfg)
+	orgs.RegisterRoutes(mux, s.cfg.JWTSecret)
+}
