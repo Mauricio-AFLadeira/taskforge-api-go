@@ -49,7 +49,7 @@ func main() {
 	addr := fmt.Sprintf(":%d", cfg.AppPort)
 	httpSrv := &http.Server{
 		Addr:         addr,
-		Handler:      server.New(addr, pool, rdb),
+		Handler:      server.New(cfg, pool, rdb),
 		ReadTimeout:  15 * time.Second,
 		WriteTimeout: 15 * time.Second,
 		IdleTimeout:  60 * time.Second,

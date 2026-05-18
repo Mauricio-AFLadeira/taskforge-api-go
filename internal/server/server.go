@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"time"
@@ -10,6 +11,7 @@ import (
 
 	goredis "github.com/redis/go-redis/v9"
 
+	"github.com/mauricio-reportei/taskforge-api-go/internal/config"
 	"github.com/mauricio-reportei/taskforge-api-go/internal/middleware"
 	"github.com/mauricio-reportei/taskforge-api-go/internal/shared"
 )
@@ -20,14 +22,17 @@ type Server struct {
 	handler http.Handler
 	pool    *pgxpool.Pool
 	rdb     *goredis.Client
+	cfg     config.Config
 }
 
 // New configures routes and middleware.
-func New(addr string, pool *pgxpool.Pool, rdb *goredis.Client) *Server {
+func New(cfg config.Config, pool *pgxpool.Pool, rdb *goredis.Client) *Server {
+	addr := fmt.Sprintf(":%d", cfg.AppPort)
 	s := &Server{
 		addr: addr,
 		pool: pool,
 		rdb:  rdb,
+		cfg:  cfg,
 	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -37,6 +42,8 @@ func New(addr string, pool *pgxpool.Pool, rdb *goredis.Client) *Server {
 		}
 		s.health(w, r)
 	})
+
+	s.mountAPIRoutes(mux)
 
 	stack := middleware.Recoverer(middleware.RequestLogger(middleware.RateLimiter(mux)))
 	s.handler = stack
