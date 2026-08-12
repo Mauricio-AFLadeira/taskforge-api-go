@@ -8,10 +8,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/config"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/middleware"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/shared"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/users"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/config"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/middleware"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/shared"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/users"
 )
 
 type Handler struct {

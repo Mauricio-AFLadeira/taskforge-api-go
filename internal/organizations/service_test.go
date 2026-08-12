@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/users"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/users"
 )
 
 type fakeUsersRepo struct {

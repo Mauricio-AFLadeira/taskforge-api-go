@@ -1,4 +1,4 @@
-module github.com/mauricio-reportei/taskforge-api-go
+module github.com/Mauricio-AFLadeira/taskforge-api-go
 
 go 1.21
 

@@ -12,10 +12,10 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/config"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/database"
-	taskforgeredis "github.com/mauricio-reportei/taskforge-api-go/internal/redis"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/server"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/config"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/database"
+	taskforgeredis "github.com/Mauricio-AFLadeira/taskforge-api-go/internal/redis"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/server"
 )
 
 func main() {

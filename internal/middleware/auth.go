@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/auth"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/shared"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/auth"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/shared"
 )
 
 const bearerPrefix = "Bearer "

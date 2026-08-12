@@ -5,9 +5,9 @@ package server
 import (
 	"net/http"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/auth"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/organizations"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/middleware"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/auth"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/organizations"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/middleware"
 )
 
 func (s *Server) mountAPIRoutes(mux *http.ServeMux) {

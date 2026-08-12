@@ -11,9 +11,9 @@ import (
 
 	goredis "github.com/redis/go-redis/v9"
 
-	"github.com/mauricio-reportei/taskforge-api-go/internal/config"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/middleware"
-	"github.com/mauricio-reportei/taskforge-api-go/internal/shared"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/config"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/middleware"
+	"github.com/Mauricio-AFLadeira/taskforge-api-go/internal/shared"
 )
 
 // Server bundles HTTP dependencies for TaskForge API.
